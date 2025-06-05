@@ -209,9 +209,10 @@
 
   var clickHandler = function (e) {
     var $this   = $(this)
-    var href    = $this.attr('href')
-    if (href) {
-      href = href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+    // Just turn off the ability to pass in an href.
+    // This is solved in later versions of bootstrap, but is a security vulnerability.
+    if ($this.attr("href")) {
+      throw new Error("You can't use href, please use data-target. See https://www.cve.org/CVERecord?id=CVE-2024-6484 for details.");
     }
 
     var target  = $this.attr('data-target') || href
