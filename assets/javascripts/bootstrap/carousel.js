@@ -209,12 +209,13 @@
 
   var clickHandler = function (e) {
     var $this   = $(this)
-    var href    = $this.attr('href')
-    if (href) {
-      href = href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+    // This just turns off the href option. I don't use it, so
+    // this works for me. 
+    if ($this.attr("href")) {
+      throw new Error("you can't use href, please use data-target. See https://www.cve.org/CVERecord?id=CVE-2024-6484 for further details.");
     }
 
-    var target  = $this.attr('data-target') || href
+    var target  = $this.attr('data-target')
     var $target = $(document).find(target)
 
     if (!$target.hasClass('carousel')) return
